@@ -5,7 +5,16 @@ calculator program yourself in this file.
 """
 
 from arithmetic import *
+from functools import reduce
 
+def my_reduce(function, input_list):
+	init = input_list[0]
+	#init = None
+	for item in input_list[1:]:
+		init = function(init,item)
+	return init
+
+print(my_reduce(lambda x,y:divide(x,y), [1,2,3]))
 # # No setup
 # repeat forever:
 def my_calculator():
@@ -20,7 +29,8 @@ def my_calculator():
 			break
 		else:
 			if split_input[0] == "+":
-				print (add(split_input[1],split_input[2]))
+				print (reduce(lambda x,y:add(x,y),split_input[1:]))
+
 			elif split_input[0] == "-":
 				print (subtract(split_input[1], split_input[2]))
 			elif split_input[0] == "*":
@@ -36,7 +46,7 @@ def my_calculator():
 			elif split_input[0] == "mod":
 				print (mod(split_input[1], split_input[2]))
 
-my_calculator()
+#my_calculator()
 #     read input
 #     tokenize input
 #     if the first token is "q":
